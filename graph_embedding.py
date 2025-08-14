@@ -27,15 +27,15 @@ def drop_existing_graph():
         graph.run(f"CALL gds.graph.drop('{GRAPH_NAME}', false)")
 
 def create_graph_projection():
-    """Buat graph projection dari Paper dengan 2 jenis relasi: CITES dan REFERENCES"""
-    logger.info("Membuat graph projection untuk Paper dengan CITES dan REFERENCES...")
+    """Buat graph projection dari Paper dengan 2 jenis relasi: CITES dan CITED_BY"""
+    logger.info("Membuat graph projection untuk Paper dengan CITES dan CITED_BY...")
     graph.run(f"""
         CALL gds.graph.project(
             '{GRAPH_NAME}',
             'Paper',
             {{
                 CITES: {{ type: 'CITES', orientation: 'UNDIRECTED' }},
-                REFERENCES: {{ type: 'REFERENCES', orientation: 'UNDIRECTED' }}
+                CITED_BY: {{ type: 'CITED_BY', orientation: 'UNDIRECTED' }}
             }}
         )
     """)
